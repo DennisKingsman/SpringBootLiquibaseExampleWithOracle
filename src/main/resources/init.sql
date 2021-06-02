@@ -3,7 +3,7 @@ MINVALUE 1 START WITH 1 INCREMENT BY 1;
 
 --frequently updated (no index)
 CREATE TABLE T_AUDITS (
-    au_audit_id NUMBER(19) DEFAULT seq_audit_for_key.nextval NOT NULL,
+    au_audit_id NUMBER(19) DEFAULT seq_audit_key.nextval NOT NULL,
     au_history VARCHAR(200) NOT NULL,
     au_status VARCHAR(100) NOT NULL,
     au_payment_value NUMBER(38) NOT NULL,
@@ -14,7 +14,7 @@ CREATE SEQUENCE seq_client_key
 MINVALUE 1 START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE T_CLIENTS (
-    cl_client_id NUMBER(19) DEFAULT seq_client_for_key.NEXTVAL NOT NULL,
+    cl_client_id NUMBER(19) DEFAULT seq_client_key.NEXTVAL NOT NULL,
     cl_organisation_name VARCHAR(200) NOT NULL,
     cl_status_yn NUMBER(1) NOT NULL,
     cl_contact_fio VARCHAR(300) NOT NULL,
@@ -32,13 +32,13 @@ CREATE SEQUENCE seq_account_key
 MINVALUE 1 START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE T_ACCOUNTS (
-    ac_account_id NUMBER (19) DEFAULT seq_account_for_key.NEXTVAL NOT NULL,
+    ac_account_id NUMBER (19) DEFAULT seq_account_key.NEXTVAL NOT NULL,
     ac_number NUMBER (38) NOT NULL,
     ac_client_id NUMBER (19) NOT NULL,
     PRIMARY KEY (ac_account_id),
 
     CONSTRAINT fk_accounts_clients_01
-        FOREIGN KEY (ac_client_id) REFERENCES T_CLIENTS (client_id)
+        FOREIGN KEY (ac_client_id) REFERENCES T_CLIENTS (cl_client_id)
 );
 
 CREATE INDEX idx_accounts_01 ON T_ACCOUNTS (ac_number);
