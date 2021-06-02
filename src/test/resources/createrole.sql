@@ -33,3 +33,9 @@ GRANT
 TO FIRST_TEST_ROLE;
 
 GRANT FIRST_TEST_ROLE TO TESTUSER;
+
+select TABLESPACE_NAME from dba_tablespaces;
+
+ALTER USER TESTUSER quota unlimited on SYSTEM;
+
+ALTER USER TESTUSER quota unlimited on USERS;
